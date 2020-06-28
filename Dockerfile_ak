@@ -1,0 +1,7 @@
+FROM tensorflow/tensorflow:latest-gpu
+
+RUN pip install numpy pandas scikit-learn
+
+RUN pip install packaging
+RUN pip install https://github.com/keras-team/keras-tuner/archive/1.0.2rc0.tar.gz
+RUN pip install autokeras --no-deps

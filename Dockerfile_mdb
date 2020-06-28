@@ -1,0 +1,6 @@
+FROM pytorch/pytorch:latest
+
+RUN pip install numpy pandas scikit-learn
+
+RUN pip install mindsdb mindsdb-native mindsdb-server
+RUN python -m nltk.downloader -d /usr/local/share/nltk_data punkt
