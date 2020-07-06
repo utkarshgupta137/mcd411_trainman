@@ -21,18 +21,18 @@ df = df[df['datetime'] < pd.Timestamp(END_DATE) + pd.DateOffset(MONTHS * 30)]
 df.loc[df['revenue'] == 0, 'revenue'] = 0.01
 df = df.reset_index()
 
-data = calibration_and_holdout_data(df, 'user_id', 'datetime', calibration_period_end=END_DATE, monetary_value_col='revenue')
-bgf = BetaGeoFitter()
-bgf.fit(data['frequency_cal'], data['recency_cal'], data['T_cal'])
-plot_calibration_purchases_vs_holdout_purchases(bgf, data)
-plt.savefig('plot_calibration_purchases_vs_holdout_purchases.svg')
-plt.close()
-
-data = summary_data_from_transaction_data(df, 'user_id', 'datetime', observation_period_end=END_DATE, monetary_value_col='revenue')
-bgf = BetaGeoFitter()
-bgf.fit(data['frequency'], data['recency'], data['T'])
-
 if PLOT:
+    data = calibration_and_holdout_data(df, 'user_id', 'datetime', calibration_period_end=END_DATE, monetary_value_col='revenue')
+    bgf = BetaGeoFitter()
+    bgf.fit(data['frequency_cal'], data['recency_cal'], data['T_cal'])
+    plot_calibration_purchases_vs_holdout_purchases(bgf, data)
+    plt.savefig('plot_calibration_purchases_vs_holdout_purchases.svg')
+    plt.close()
+
+    data = summary_data_from_transaction_data(df, 'user_id', 'datetime', observation_period_end=END_DATE, monetary_value_col='revenue')
+    bgf = BetaGeoFitter()
+    bgf.fit(data['frequency'], data['recency'], data['T'])
+
     days = (pd.Timestamp(END_DATE) - pd.Timestamp(START_DATE)).days
     plot_cumulative_transactions(bgf, df, 'datetime', 'user_id', days + MONTHS*30, days)
     plt.savefig('plot_cumulative_transactions.svg')
@@ -44,11 +44,11 @@ if PLOT:
     plt.savefig('plot_period_transactions.svg')
     plt.close()
 
-    plot_probability_alive_matrix(bgf)
-    plt.savefig('plot_probability_alive_matrix.svg')
-    plt.close()
     plot_frequency_recency_matrix(bgf)
     plt.savefig('plot_frequency_recency_matrix.svg')
+    plt.close()
+    plot_probability_alive_matrix(bgf)
+    plt.savefig('plot_probability_alive_matrix.svg')
     plt.close()
     # plot_expected_repeat_purchases(bgf)
     # plt.savefig('plot_expected_repeat_purchases.svg')
@@ -57,6 +57,7 @@ if PLOT:
     # plt.savefig('plot_history_alive.svg')
     # plt.close()
 
+data = summary_data_from_transaction_data(df, 'user_id', 'datetime', observation_period_end=END_DATE, monetary_value_col='revenue')
 data_train, data_test = train_test_split(data, train_size=0.8, random_state=0)
 bgf = BetaGeoFitter()
 bgf.fit(data_train['frequency'], data_train['recency'], data_train['T'])
