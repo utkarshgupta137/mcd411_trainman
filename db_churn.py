@@ -1,11 +1,20 @@
+#!/usr/bin/env python
+""" db_churn.py
+    Calculates probability alive for each user using the BG/NBD model
+    Segments into risk based on calculated probability
+
+    START_DATE (Inclusive): First date to be included
+    END_DATE (Non-Inclusive): Last date + 1 to be included
+"""
+
 import numpy as np
 import pandas as pd
 import sqlalchemy as sql
 from lifetimes import BetaGeoFitter
 from lifetimes.utils import summary_data_from_transaction_data
 
-START_DATE = '2018-06-01'                               # Inclusive
-END_DATE = '2020-03-16'                                 # Non-inclusive
+START_DATE = '2018-06-01'
+END_DATE = '2020-03-16'
 
 sql_engine = sql.create_engine('mysql+mysqldb://root:@localhost/PSP')
 df = pd.read_sql_query('select user_id, created_at as datetime from irctc_booking where pnr_number is not null', sql_engine)

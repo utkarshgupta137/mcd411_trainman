@@ -1,3 +1,27 @@
+#!/usr/bin/env python
+""" db_user.py
+    Derives city from origin & dest:
+        Converts origins & destinations from station code to station name using city & train_station
+        Finds the mode of origins of trains booked by user
+        Finds the mode of destinations of trains booked by user
+        Takes the common of both modes (There can be multiple modes for each)
+        If there is only one common mode, marks it as the city
+    Derives age, gender, travel_class, quota from irctc_passenger:
+        If dob is available:
+            Sets the age as of END_DATE
+            Removes all passenger with actual age - entered age >= 3
+        If gender is available:
+            Removes all passenger with the opposite gender
+        If multiple entries are still left:
+            Tries to match the passenger.name to user.name using fuzzywuzzy
+            Removes other passenger with score cutoff: 60
+        If multiple entries are still left:
+            Keeps one with latest updated_at & then created_at & then the first one
+
+    START_DATE (Inclusive): First date to be included
+    END_DATE (Non-Inclusive): Last date + 1 to be included
+"""
+
 import os
 
 import numpy as np
@@ -5,8 +29,8 @@ import pandas as pd
 import sqlalchemy as sql
 from fuzzywuzzy import process
 
-START_DATE = '2018-06-01'                               # Inclusive
-END_DATE = '2020-03-16'                                 # Non-inclusive
+START_DATE = '2018-06-01'
+END_DATE = '2020-03-16'
 
 def get_city(x):
     origin = [cities[v] if v in cities else None for v in x['origin'].mode().to_list()]

@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+""" train_tpot.py
+    Trains the TPOT model on 80% of the data
+    Saves the model as a pipeline
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split

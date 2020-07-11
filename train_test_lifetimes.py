@@ -1,3 +1,22 @@
+#!/usr/bin/env python
+""" train_test_lifetimes.py
+    Plots various graphs depicting the fit of the model:
+        plot_calibration_purchases_vs_holdout_purchases
+        plot_period_transactions
+        plot_cumulative_transactions
+        plot_incremental_transactions
+    Plots the expected number of purchases on the next day
+    & probability alive as a function of recency & frequency
+    Trains BG/NBD & Gamma-Gamma model on 80% of data
+    Predicts Number of purchases & CLV in next few months
+    Evaluates the performance based on Mean Squared Error (MSE) & R-squared (R2) values
+
+    START_DATE (Inclusive): First date to be included
+    END_DATE (Non-Inclusive): Last date + 1 to be included
+    MONTHS: Number of months to calculate purchases & CLV for (multiplied by 30 for days)
+    PLOT: Whether to plot Igraphs
+"""
+
 import numpy as np
 import pandas as pd
 import sqlalchemy as sql
@@ -8,9 +27,9 @@ from matplotlib import pyplot as plt
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
-START_DATE = '2018-06-01'                               # Inclusive
-END_DATE = '2019-12-01'                                 # Non-inclusive
-MONTHS = 3                                              # CLV Length (Multiplied by 30)
+START_DATE = '2018-06-01'
+END_DATE = '2019-12-01'
+MONTHS = 3
 PLOT = False
 
 sql_engine = sql.create_engine('mysql+mysqldb://root:@localhost/PSP')

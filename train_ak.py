@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+""" train_ak.py
+    Trains the autokeras model on 80% of the data
+    Saves the model as a standard tensorflow model
+    Note: Run in autokeras container
+"""
+
 import numpy as np
 import pandas as pd
 from autokeras import StructuredDataRegressor

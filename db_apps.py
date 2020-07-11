@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+""" db_apps.py
+
+    Reads packages from user_app & connects it to user_id via user_device_mapping
+    Sets app = True if the app was installed at any point on any of the user's devices
+    Counts the number of competior apps installed
+    Prints active user & conversion counts by app & number of apps installed
+
+    PACKAGES: Apps to be audited
+"""
+
 import numpy as np
 import pandas as pd
 import sqlalchemy as sql

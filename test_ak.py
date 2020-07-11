@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+""" test_ak.py
+    Loads & evaluates saved autokeras model based on Mean Squared Error (MSE) & R-squared (R2) values
+"""
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf

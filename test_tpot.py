@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+""" test_tpot.py
+    Fits & evaluates TPOT pipeline based on Mean Squared Error (MSE) & R-squared (R2) values
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import ElasticNetCV, LassoLarsCV

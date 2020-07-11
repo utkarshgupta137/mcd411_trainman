@@ -1,3 +1,18 @@
+#!/usr/bin/env python
+""" main.py
+    Clusters based on RFM (Recency, Frequency, Monetary Value) using K-Means (5 each)
+    Converts cluster to score (0 - 4)
+    Calculates overall score as sum of the 3 scores (0 - 12)
+    Converts score to segment (Low: 0 - 4, Mid: 5 - 8, High: 9 - 12)
+    Plots Intra-RFM distribution
+    Outputs variation of demographics (age, gender, travel_class, quota), top twenty cities
+    probality alive & risk, number of competitor apps installed by Score & Segment
+
+    START_DATE (Inclusive): First date to be included
+    END_DATE (Non-Inclusive): Last date + 1 to be included
+    PLOT: Whether to plot Intra-RFM graphs
+"""
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -5,8 +20,8 @@ import sqlalchemy as sql
 from matplotlib import pyplot as plt
 from sklearn.cluster import KMeans
 
-START_DATE = '2018-06-01'                               # Inclusive
-END_DATE = '2020-03-16'                                 # Non-inclusive
+START_DATE = '2018-06-01'
+END_DATE = '2020-03-16'
 PLOT = False
 
 pd.set_option('display.float_format', lambda x: '%.5f' % x)

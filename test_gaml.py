@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+""" test_gaml.py
+    Launches a docker container with Google automl tables server
+    Evaluates the saved model based on Mean Squared Error (MSE) & R-squared (R2) values
+    NOTE: Model trained on console.cloud.google.com/automl-tables
+"""
+
 import json
 import os
 import time

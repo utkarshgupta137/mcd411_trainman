@@ -1,10 +1,25 @@
+#!/usr/bin/env python
+""" db_booking.py
+    Generates features & target for ML models
+
+    Used by:
+        AutoKeras: AutoML based on Keras pipelines (Tensorflow-based)
+        TPOT: AutoML based on various pipelines (PyTorch-based)
+        MindsDB: AutoML Blackbox (Machine Learning)
+        Google AutoML Tables: Blackbox (Deep Learning)
+
+    START_DATE (Inclusive): First date to be included for training
+    END_DATE (Non-Inclusive): Last date + 1 to be included for training
+    MONTHS: Number of months to calculate CLV for (multiplied by 30 for days)
+"""
+
 import numpy as np
 import pandas as pd
 import sqlalchemy as sql
 
-START_DATE = '2018-06-01'                               # Inclusive
-END_DATE = '2019-12-01'                                 # Non-inclusive
-MONTHS = 3                                              # CLV Length (Multiplied by 30)
+START_DATE = '2018-06-01'
+END_DATE = '2019-12-01'
+MONTHS = 3
 
 sql_engine = sql.create_engine('mysql+mysqldb://root:@localhost/PSP')
 df = pd.read_sql_query('select user_id, created_at as datetime, commission as revenue from irctc_booking where pnr_number is not null', sql_engine)

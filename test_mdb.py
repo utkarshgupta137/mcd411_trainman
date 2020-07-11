@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+""" test_mdb.py
+    Loads & evaluates saved mindsdb model based on Mean Squared Error (MSE) & R-squared (R2) values
+"""
+
 import mindsdb
 import numpy as np
 import pandas as pd

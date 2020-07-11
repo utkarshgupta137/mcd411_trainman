@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+""" train_mdb.py
+    Trains the mindsdb model on 80% of the data
+    Saves the model as mdb.zip
+    Note: Run in mindsdb container
+"""
+
 import mindsdb
 import numpy as np
 import pandas as pd
